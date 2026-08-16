@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chatbot</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+    <div class="app-wrapper">
+
+        <div class="sidebar">
+            <button id="new-chat-btn">+ New Chat</button>
+            <div id="chat-list">
+                {% for chat_id, title in chats %}
+                    <div class="chat-item {{ 'active' if chat_id == active_chat_id else '' }}" data-chat-id="{{ chat_id }}">
+                        <span class="chat-title">{{ title }}</span>
+                        <button class="delete-chat-btn" data-chat-id="{{ chat_id }}">🗑️</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="chat-container">
+
+            <div class="chat-header">
+                <h1>AI Chatbot</h1>
+                <button id="theme-toggle">🌙 Dark</button>
+            </div>
+
+            <div id="chat-box" data-current-chat-id="{{ active_chat_id }}">
+                {% if messages %}
+                    {% for sender, message, timestamp in messages %}
+                        <div class="message {{ 'user-message' if sender == 'user' else 'bot-message' }}" title="{{ timestamp }}">{{ message }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="message bot-message">Hi! How can I help you today?</div>
+                {% endif %}
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-btn">Send</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
