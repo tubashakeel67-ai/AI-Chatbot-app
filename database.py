@@ -8,6 +8,7 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS chats (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id TEXT NOT NULL,
             title TEXT NOT NULL,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
@@ -25,22 +26,33 @@ def init_db():
     conn.commit()
     conn.close()
 
-def create_chat(title="New Chat"):
+def create_chat(session_id, title="New Chat"):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO chats (title) VALUES (?)", (title,))
+    cursor.execute("INSERT INTO chats (session_id, title) VALUES (?, ?)", (session_id, title))
     chat_id = cursor.lastrowid
     conn.commit()
     conn.close()
     return chat_id
 
-def get_all_chats():
+def get_all_chats(session_id):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
-    cursor.execute("SELECT id, title FROM chats ORDER BY id DESC")
+    cursor.execute(
+        "SELECT id, title FROM chats WHERE session_id = ? ORDER BY id DESC",
+        (session_id,)
+    )
     rows = cursor.fetchall()
     conn.close()
     return rows
+
+def chat_belongs_to_session(chat_id, session_id):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute("SELECT id FROM chats WHERE id = ? AND session_id = ?", (chat_id, session_id))
+    row = cursor.fetchone()
+    conn.close()
+    return row is not None
 
 def get_chat_messages(chat_id):
     conn = sqlite3.connect(DB_NAME)
