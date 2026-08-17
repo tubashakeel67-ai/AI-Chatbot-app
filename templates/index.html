@@ -16,8 +16,8 @@
             <div id="chat-list">
                 {% for chat_id, title in chats %}
                     <div class="chat-item {{ 'active' if chat_id == active_chat_id else '' }}" data-chat-id="{{ chat_id }}">
-                        <span class="chat-title">{{ title }}</span>
-                        <button class="delete-chat-btn" data-chat-id="{{ chat_id }}">🗑️</button>
+                        <span class="chat-title" data-chat-id="{{ chat_id }}">{{ title }}</span>
+                        <button class="menu-btn" data-chat-id="{{ chat_id }}"><span class="dot"></span><span class="dot"></span><span class="dot"></span></button>
                     </div>
                 {% endfor %}
             </div>

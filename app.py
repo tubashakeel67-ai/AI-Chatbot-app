@@ -59,6 +59,22 @@ def remove_chat(chat_id):
     delete_chat(chat_id)
     return jsonify({"success": True})
 
+@app.route('/rename_chat/<int:chat_id>', methods=['POST'])
+def rename_chat(chat_id):
+    session_id = get_session_id()
+
+    if not chat_belongs_to_session(chat_id, session_id):
+        return jsonify({"error": "Not authorized"}), 403
+
+    data = request.get_json()
+    new_title = data.get('title', '').strip()
+
+    if not new_title:
+        return jsonify({"error": "Title cannot be empty"}), 400
+
+    update_chat_title(chat_id, new_title)
+    return jsonify({"success": True, "title": new_title})
+
 @app.route('/chat', methods=['POST'])
 def chat():
     session_id = get_session_id()

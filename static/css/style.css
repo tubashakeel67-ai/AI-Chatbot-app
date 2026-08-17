@@ -16,6 +16,8 @@
     --sidebar-item-hover: #ececf1;
     --sidebar-item-active: #e3e3e8;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --menu-bg: #ffffff;
+    --menu-hover: #f0f0f0;
 }
 
 [data-theme="dark"] {
@@ -36,6 +38,8 @@
     --sidebar-item-hover: #2a2a2a;
     --sidebar-item-active: #343434;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --menu-bg: #2a2a2a;
+    --menu-hover: #383838;
 }
 
 * {
@@ -100,6 +104,7 @@ body {
     color: var(--text-secondary);
     font-size: 14px;
     transition: background-color 0.15s ease;
+    position: relative;
 }
 
 .chat-item:hover {
@@ -119,22 +124,70 @@ body {
     flex: 1;
 }
 
-.delete-chat-btn {
+.menu-btn {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 13px;
     opacity: 0;
-    transition: opacity 0.15s ease;
-    padding: 4px;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+    padding: 6px 8px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
 }
 
-.chat-item:hover .delete-chat-btn {
-    opacity: 0.6;
+.menu-btn .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    display: block;
 }
 
-.delete-chat-btn:hover {
+.chat-item:hover .menu-btn {
+    opacity: 0.7;
+}
+
+.menu-btn:hover {
     opacity: 1 !important;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.chat-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 8px;
+    background-color: var(--menu-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    min-width: 130px;
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+.menu-option {
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: background-color 0.15s ease;
+}
+
+.menu-option:hover {
+    background-color: var(--menu-hover);
+}
+
+.delete-option {
+    color: #e74c3c;
 }
 
 .chat-container {
@@ -276,7 +329,6 @@ body {
     }
 }
 
-/* ---- Code blocks inside bot messages ---- */
 .bot-message pre {
     background-color: #1e1e1e;
     color: #d4d4d4;
@@ -325,7 +377,6 @@ body {
     margin-bottom: 0;
 }
 
-/* ---- Copy button on code blocks ---- */
 .copy-btn {
     position: absolute;
     top: 6px;
@@ -351,7 +402,6 @@ body {
     color: #2ecc71;
 }
 
-/* ---- Disabled states while waiting for reply ---- */
 #send-btn:disabled {
     background-color: var(--input-border);
     cursor: not-allowed;
@@ -360,4 +410,51 @@ body {
 #user-input:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.rename-input {
+    flex: 1;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--btn-bg);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+/* ---- Full message copy button (icon-based) ---- */
+.message-copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    background-color: transparent;
+    border: none;
+    color: var(--text-secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+    padding: 0;
+}
+
+.bot-message:hover .message-copy-btn {
+    opacity: 0.7;
+    height: 26px;
+    width: 26px;
+    padding: 4px;
+}
+
+.message-copy-btn:hover {
+    opacity: 1 !important;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.message-copy-btn.copied {
+    color: #2ecc71;
 }
