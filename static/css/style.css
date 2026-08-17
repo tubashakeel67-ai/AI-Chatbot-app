@@ -523,5 +523,7 @@ body {
     .chat-container {
         padding: 16px;
         height: 100dvh;
+        max-height: 100vh;
+        overflow: hidden;
     }
 }

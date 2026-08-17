@@ -245,8 +245,8 @@ function showChatMenu(e, chatId, chatItem) {
     const menu = document.createElement('div');
     menu.classList.add('chat-menu-dropdown');
     menu.innerHTML = `
-        <button class="menu-option rename-option">✏️ Rename</button>
-        <button class="menu-option delete-option">🗑️ Delete</button>
+        <button class="menu-option rename-option"> Rename</button>
+        <button class="menu-option delete-option"> Delete</button>
     `;
 
     chatItem.appendChild(menu);
