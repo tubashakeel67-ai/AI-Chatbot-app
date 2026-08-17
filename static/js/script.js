@@ -4,8 +4,21 @@ const sendBtn = document.getElementById('send-btn');
 const themeToggle = document.getElementById('theme-toggle');
 const newChatBtn = document.getElementById('new-chat-btn');
 const chatList = document.getElementById('chat-list');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+const menuToggleBtnMobile = document.getElementById('menu-toggle-btn-mobile');
 
 let currentChatId = parseInt(chatBox.getAttribute('data-current-chat-id'));
+
+menuToggleBtnMobile.addEventListener('click', function () {
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('open');
+});
+
+sidebarOverlay.addEventListener('click', function () {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('open');
+});
 
 const copyIconSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
 const checkIconSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
@@ -112,6 +125,9 @@ newChatBtn.addEventListener('click', async function () {
 
     document.querySelectorAll('.chat-item').forEach(item => item.classList.remove('active'));
     chatList.prepend(chatItem);
+
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('open');
 });
 
 function createChatItemElement(chatId, title) {
@@ -162,6 +178,9 @@ async function loadChat(chatId) {
     });
 
     scrollToBottom();
+
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('open');
 }
 
 async function deleteChat(chatId, chatItemElement) {
@@ -226,8 +245,8 @@ function showChatMenu(e, chatId, chatItem) {
     const menu = document.createElement('div');
     menu.classList.add('chat-menu-dropdown');
     menu.innerHTML = `
-        <button class="menu-option rename-option"> Rename</button>
-        <button class="menu-option delete-option"> Delete</button>
+        <button class="menu-option rename-option">✏️ Rename</button>
+        <button class="menu-option delete-option">🗑️ Delete</button>
     `;
 
     chatItem.appendChild(menu);
