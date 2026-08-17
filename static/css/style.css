@@ -57,7 +57,7 @@ html, body {
 }
 
 body {
-    font-family: 'Courier New', monospace;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
