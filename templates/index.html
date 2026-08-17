@@ -58,5 +58,21 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+    function adjustForKeyboard() {
+        if (window.visualViewport) {
+            const vh = window.visualViewport.height;
+            document.querySelector('.app-wrapper').style.height = vh + 'px';
+            window.scrollTo(0, 0);
+        }
+    }
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', adjustForKeyboard);
+        window.visualViewport.addEventListener('scroll', adjustForKeyboard);
+        adjustForKeyboard();
+    }
+    </script>
+
 </body>
 </html>
