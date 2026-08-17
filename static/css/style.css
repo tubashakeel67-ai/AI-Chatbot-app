@@ -522,6 +522,6 @@ body {
 
     .chat-container {
         padding: 16px;
-        height: 100vh;
+        height: 100dvh;
     }
 }
