@@ -44,7 +44,12 @@
                         <div class="message {{ 'user-message' if sender == 'user' else 'bot-message' }}" title="{{ timestamp }}">{{ message }}</div>
                     {% endfor %}
                 {% else %}
-                    <div class="message bot-message">Hi! How can I help you today?</div>
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🤖</div>
+                        <h2>Ask anything</h2>
+                        <p>💬 Text-based questions only</p>
+                        <p>🧠 Coding • Concepts • Explanations</p>
+                    </div>
                 {% endif %}
             </div>
 

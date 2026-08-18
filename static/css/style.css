@@ -4,14 +4,14 @@
     --text-color: #333;
     --text-secondary: #6e6e80;
     --chatbox-bg: #ffffff;
-    --user-bubble-bg: #1abc9c;
+    --user-bubble-bg: #4a90e2;
     --user-bubble-text: #ffffff;
     --bot-bubble-bg: #f0f0f0;
     --bot-bubble-text: #1a1a1a;
     --input-border: #d9d9e3;
     --input-bg: #ffffff;
-    --btn-bg: #1abc9c;
-    --btn-hover: #17a589;
+    --btn-bg: #4a90e2;
+    --btn-hover: #357abd;
     --sidebar-bg: #f7f7f8;
     --sidebar-item-hover: #ececf1;
     --sidebar-item-active: #e3e3e8;
@@ -21,25 +21,25 @@
 }
 
 [data-theme="dark"] {
-    --bg-color: #212121;
-    --container-bg: #212121;
-    --text-color: #ececec;
-    --text-secondary: #a0a0a8;
-    --chatbox-bg: #212121;
-    --user-bubble-bg: #17a589;
+    --bg-color: #2b2e40;
+    --container-bg: #2b2e40;
+    --text-color: #f2f2f5;
+    --text-secondary: #b8bacc;
+    --chatbox-bg: #2b2e40;
+    --user-bubble-bg: #3d4157;
     --user-bubble-text: #ffffff;
-    --bot-bubble-bg: #2f2f2f;
-    --bot-bubble-text: #ececec;
-    --input-border: #3e3e42;
-    --input-bg: #2f2f2f;
-    --btn-bg: #1abc9c;
-    --btn-hover: #48d1b5;
-    --sidebar-bg: #171717;
-    --sidebar-item-hover: #2a2a2a;
-    --sidebar-item-active: #343434;
+    --bot-bubble-bg: #3d4157;
+    --bot-bubble-text: #f2f2f5;
+    --input-border: #454a63;
+    --input-bg: #353a4f;
+    --btn-bg: #2dd4a7;
+    --btn-hover: #26bb92;
+    --sidebar-bg: #22242f;
+    --sidebar-item-hover: #353a4f;
+    --sidebar-item-active: #3d4157;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    --menu-bg: #2a2a2a;
-    --menu-hover: #383838;
+    --menu-bg: #353a4f;
+    --menu-hover: #454a63;
 }
 
 * {
@@ -57,7 +57,7 @@ html, body {
 }
 
 body {
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
     transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -275,6 +275,47 @@ body {
 
 #theme-toggle:hover {
     background-color: var(--sidebar-item-hover);
+}
+
+[data-theme="dark"] #theme-toggle {
+    background-color: var(--btn-bg);
+    border: none;
+    color: #12261f;
+    font-weight: 600;
+}
+
+[data-theme="dark"] #theme-toggle:hover {
+    background-color: var(--btn-hover);
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    gap: 10px;
+    padding: 20px;
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 42px;
+    margin-bottom: 4px;
+}
+
+.empty-state h2 {
+    color: var(--text-color);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.empty-state p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
 }
 
 #chat-box {
