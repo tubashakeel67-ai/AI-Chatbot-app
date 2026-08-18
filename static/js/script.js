@@ -10,6 +10,22 @@ const menuToggleBtnMobile = document.getElementById('menu-toggle-btn-mobile');
 
 let currentChatId = parseInt(chatBox.getAttribute('data-current-chat-id'));
 
+const emptyStateHTML = `
+    <div class="empty-state">
+        <div class="empty-state-icon">🤖</div>
+        <h2>Ask anything</h2>
+        <p>💬 Text-based questions only</p>
+        <p>🧠 Coding • Concepts • Explanations</p>
+    </div>
+`;
+
+function removeEmptyState() {
+    const emptyState = chatBox.querySelector('.empty-state');
+    if (emptyState) {
+        emptyState.remove();
+    }
+}
+
 menuToggleBtnMobile.addEventListener('click', function () {
     sidebar.classList.add('open');
     sidebarOverlay.classList.add('open');
@@ -119,7 +135,7 @@ newChatBtn.addEventListener('click', async function () {
     currentChatId = data.chat_id;
     chatBox.setAttribute('data-current-chat-id', currentChatId);
 
-    chatBox.innerHTML = '<div class="message bot-message">Hi! How can I help you today?</div>';
+    chatBox.innerHTML = emptyStateHTML;
 
     const chatItem = createChatItemElement(currentChatId, data.title);
 
@@ -154,7 +170,7 @@ async function loadChat(chatId) {
     chatBox.innerHTML = '';
 
     if (data.messages.length === 0) {
-        chatBox.innerHTML = '<div class="message bot-message">Hi! How can I help you today?</div>';
+        chatBox.innerHTML = emptyStateHTML;
     } else {
         data.messages.forEach(item => {
             const div = document.createElement('div');
@@ -283,6 +299,8 @@ async function sendMessage() {
     const message = userInput.value.trim();
 
     if (!message) return;
+
+    removeEmptyState();
 
     const userMessageDiv = document.createElement('div');
     userMessageDiv.classList.add('message', 'user-message');
