@@ -316,7 +316,7 @@ async function sendMessage() {
 
     const typingDiv = document.createElement('div');
     typingDiv.classList.add('message', 'bot-message');
-    typingDiv.textContent = 'Bot is typing...';
+    typingDiv.textContent = 'Thinking';
     chatBox.appendChild(typingDiv);
     scrollToBottom();
 
