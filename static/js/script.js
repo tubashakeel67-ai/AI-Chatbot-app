@@ -25,7 +25,7 @@ const emptyStateHTML = `
         </div>
         <h2>Ask anything</h2>
         <p>💬 Text-based questions only</p>
-        <p>🧠 Coding • Concepts • Explanations</p>
+        <p> Coding • Concepts • Explanations</p>
     </div>
 `;
 
